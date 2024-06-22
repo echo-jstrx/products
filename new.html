@@ -126,12 +126,13 @@
             justify-content: flex-start;
         }
         .image-preview {
-            width: calc(25% - 10px);
+            flex: 1 0 calc(25% - 10px); /* Use flex properties for dynamic width */
             cursor: pointer;
             border-radius: 4px;
             overflow: hidden;
             border: 1px solid #ccc;
             transition: border-color 0.3s;
+            box-sizing: border-box; /* Ensure box-sizing includes border and padding */
         }
         .image-preview img {
             width: 100%;

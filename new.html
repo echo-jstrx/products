@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Product</title>
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .product-display-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .product {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .product-info {
+            padding: 20px;
+            width: 40%;
+        }
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .product-shop {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .product-type {
+            font-size: 16px;
+            margin-bottom: 10px;
+            background-color: #6fd6e8;
+            border: solid 1px #51b1c2;
+        }
+        .product-id {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .product-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .product-policies {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .product-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .product-button:hover {
+            background-color: #2980b9;
+        }
+        .policy-heading {
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .policy-content {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .product-image {
+            min-width: 65%;
+            height: auto;
+            position: relative;
+        }
+        .product-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .slick-slider {
+            margin-top: 10px;
+        }
+        .slick-prev,
+        .slick-next {
+            font-size: 20px;
+            line-height: 1;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .slick-prev {
+            left: 10px;
+        }
+        .slick-next {
+            right: 10px;
+        }
+        .image-preview {
+            cursor: pointer;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+        .image-preview img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .product-image, .product-info {
+                width: 100%;
+            }
+            .product {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="product-display-container">
+        <div class="product">
+            <div class="product-image" id="product-image">
+                <img src="depositphotos_41878603-stock-photo-global-delivery.jpg" alt="Product Image">
+            </div>
+            <div class="product-info">
+                <div class="product-title">Premium Halfmoon Dumbo</div>
+                <div class="product-type">Dumbo Halfmoon</div>
+                <div class="product-shop">Shop Name</div>
+                <div class="product-id">SKU: 1CD2K3S4A5</div>
+                <div class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo euismod, tincidunt libero vel, aliquam nunc.</div>
+                <div class="product-policies">
+                    <div class="policy-heading" onclick="togglePolicy('return-policy')">Refund Policy</div>
+                    <div class="policy-content" id="return-policy">
+                        Our refund (DOA) policy allows you to claim a full refund in the event of a DOA within 7 days of a completed delivery. Please ensure the fish is in its original packaging.
+                    </div>
+                    <div class="policy-heading" onclick="togglePolicy('shipping-policy')">Shipping Policy</div>
+                    <div class="policy-content" id="shipping-policy">
+                        We offer free standard shipping within the continental US. Expedited shipping options are available at an additional cost.
+                    </div>
+                    <div class="policy-heading" onclick="togglePolicy('privacy-policy')">Privacy Policy</div>
+                    <div class="policy-content" id="privacy-policy">
+                        We respect your privacy and handle your personal information securely. Read our full privacy policy for more details.
+                    </div>
+                </div>
+                <button class="product-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slick Carousel JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Initialize Slick Carousel
+            $('#product-image').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: true,
+                asNavFor: '.image-previews'
+            });
+
+            // Initialize Slick Carousel for image previews
+            $('.image-previews').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                asNavFor: '#product-image',
+                dots: false,
+                centerMode: false,
+                focusOnSelect: true,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    }
+                ]
+            });
+
+            // Function to change main image when clicking on a preview
+            $('.image-preview').on('click', function(){
+                var slideIndex = $(this).attr('data-slide-index');
+                $('#product-image').slick('slickGoTo', slideIndex);
+            });
+        });
+
+        // Function to toggle policy content visibility
+        function togglePolicy(policyId) {
+            const policyContent = document.getElementById(policyId);
+            policyContent.style.display = policyContent.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
